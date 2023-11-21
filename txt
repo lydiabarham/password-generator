@@ -1,0 +1,42 @@
+Generate a password when the button is clicked
+Present a series of prompts for password criteria
+Length of password
+At least 8 characters but no more than 128.
+Character types
+Lowercase
+Uppercase
+Numeric
+Special characters ($@%&*, etc)
+Code should validate for each input and at least one character type should be selected
+Once prompts are answered then the password should be generated and displayed in an alert or written to the page
+
+PSEUDOCODE 
+
+//password choices
+1. prompt "enter a number between 8 and 128" and store the number in a variable named passwordLength
+2. confirm "would you like your password to contain uppercase, lowercase, numbers and special characters?" 
+3. if yes, record true in a variable allCharacterChoices
+4. if no, run through list of confirms asking user whether they would like - store these confirms within an object
+- lowercase 
+- uppercase 
+- number 
+- and special characters 
+6. record each of these in variables named lowercaseChoice, uppercaseChoice, numberChoice, and specialCharacterChoice
+7. if all are true, record true in allCharacterChoices
+8. if no characters are selected, alert "You must choose at least one type of character" and run through the series of confirms object again
+
+//create password
+9. set of functions for each character type using Math.floor and Math.random for each array:
+- lowercase *26
+- uppercase *26  
+- number *10
+- special character *23
+10. function that identifies whether lowercaseChoice, uppercaseChoice, numberChoice, and specialCharacterChoice are true or false and if they are true stores them in a new array called passwordChoicesConfirmed
+11. function that makes a random choice in passwordChoicesConfirmed array and displays the choice in a variable called characterSelected
+12. for loop the length of passwordLength that calls the function passwordChoicesConfirmed and then uses characterSelected to trigger one of the functions set for each character type using if else and == 
+13. store the outputs from each function in an array
+
+//test the password 
+14. check passwordChoicesConfirmed against the password array, store the answer in a boolean passwordSuitable 
+15. if the password fulfils all characters, alert it to the user
+16. if the password does not fulfil all characters, rerun the code until the passwordSuitable is true and alert the user
