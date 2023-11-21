@@ -89,8 +89,17 @@ var specialCharacters = [
   ];
   
   // Function to prompt user for password options
-  function getPasswordOptions() {
-  
+  let getPasswordOptions = function() {
+    let passwordLength = parseInt(prompt("Enter a value between 8 and 128", "0"), 10);
+    let characterLower = confirm("Would you like your password to contain lowercase letters?");
+    let characterUpper = confirm("Would you like your password to contain uppercase letters?");
+    let characterNumbers = confirm("Would you like your password to contain numbers?");
+    let characterSpecial = confirm("Would you like your password to conatin special characters?");
+    console.log(passwordLength);
+    console.log(characterLower);
+    console.log(characterUpper);
+    console.log(characterNumbers);
+    console.log(characterSpecial);
   }
   
   // Function for getting a random element from an array
@@ -102,6 +111,9 @@ var specialCharacters = [
   function generatePassword() {
   
   }
+
+  getPasswordOptions()
+  //console.log("Your password is " + getPasswordOptions.passwordLength + " characters long.")
   
   // Get references to the #generate element
   var generateBtn = document.querySelector('#generate');
