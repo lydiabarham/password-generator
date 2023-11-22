@@ -88,23 +88,36 @@ var specialCharacters = [
     'Z'
   ];
   
-  // Function to prompt user for password options
+  // Functions to prompt user for password options
   let getPasswordOptions = function() {
-    let passwordLength = parseInt(prompt("Enter a value between 8 and 128", "0"), 10);
     let characterLower = confirm("Would you like your password to contain lowercase letters?");
     let characterUpper = confirm("Would you like your password to contain uppercase letters?");
     let characterNumbers = confirm("Would you like your password to contain numbers?");
     let characterSpecial = confirm("Would you like your password to conatin special characters?");
-    console.log(passwordLength);
+    if (characterLower === false && characterUpper === false && characterNumbers === false && characterSpecial === false) {
+        getPasswordOptions()
+    } else {
     console.log(characterLower);
     console.log(characterUpper);
     console.log(characterNumbers);
     console.log(characterSpecial);
+    }
+  }
+
+  let getPasswordLength = function() {
+    let passwordLength = parseInt(prompt("Enter a value between 8 and 128", "0"), 10);
+    if (passwordLength >= 8 && passwordLength <= 128) {
+        getPasswordOptions()
+    } else {
+        getPasswordLength()
+        }
+    console.log(passwordLength);
   }
   
   // Function for getting a random element from an array
   function getRandom(arr) {
-  
+    let random = Math.floor(Math.random() * arr.length);
+    console.log(random, arr[random]);
   }
   
   // Function to generate password with user input
@@ -112,7 +125,12 @@ var specialCharacters = [
   
   }
 
-  getPasswordOptions()
+  getPasswordLength()
+  getRandom(lowerCasedCharacters)
+  getRandom(upperCasedCharacters)
+  getRandom(numericCharacters)
+  getRandom(specialCharacters)
+
   //console.log("Your password is " + getPasswordOptions.passwordLength + " characters long.")
   
   // Get references to the #generate element
