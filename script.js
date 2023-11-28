@@ -88,14 +88,14 @@ var specialCharacters = [
     'Z'
   ];
 
-// Functions to prompt user for password options
+  // Functions to prompt user for password options
 let getPasswordOptions = function () {
     let characterLower = confirm("Would you like your password to contain lowercase letters?");
     let characterUpper = confirm("Would you like your password to contain uppercase letters?");
     let characterNumbers = confirm("Would you like your password to contain numbers?");
     let characterSpecial = confirm("Would you like your password to contain special characters?");
     if (characterLower === false && characterUpper === false && characterNumbers === false && characterSpecial === false) {
-      return getPasswordOptions(); // Fix: Return the result of the recursive call
+      return getPasswordOptions();
     } else {
       return {
         characterLower,
@@ -106,8 +106,9 @@ let getPasswordOptions = function () {
     }
   }
   
+  // Function to prompt user for password length 
   let getPasswordLength = function () {
-    let passwordLength = parseInt(prompt("Enter a value between 8 and 128", "0"), 10);
+    let passwordLength = parseInt(prompt("Enter a value between 8 and 128 (your password will contain each of the character types you have selected this many times)", "0"), 10);
     if (passwordLength >= 8 && passwordLength <= 128) {
       return passwordLength;
     } else {
@@ -117,16 +118,14 @@ let getPasswordOptions = function () {
   
   // Function for getting a random element from an array
   function getRandom(arr) {
-    let random = Math.floor(Math.random() * arr.length);
-    console.log(random, arr[random]);
+    let randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
   }
   
-  //prompt user choices
-  let passwordLength = getPasswordLength();
-  let passwordOptions = getPasswordOptions();
-  
-  // Function to generate password with user input
-  function generatePassword() {
+// Function to generate password with user input
+function generatePassword() {
+    let passwordOptions = getPasswordOptions();
+    let passwordLength = getPasswordLength();
     let newPassword = [];
   
     for (let i = 0; i < passwordLength; i++) {
@@ -152,8 +151,9 @@ let getPasswordOptions = function () {
         (passwordOptions.characterNumbers && !newPassword.some(char => numericCharacters.includes(char))) ||
         (passwordOptions.characterSpecial && !newPassword.some(char => specialCharacters.includes(char)))
       ) {
-        // Regenerate the password if it doesn't meet the requirements
+        // Recreate newPassword if it doesn't meet the requirements
         newPassword = [];
+        generatePassword();
       }
     }
   
@@ -164,7 +164,7 @@ let getPasswordOptions = function () {
   // Get references to the #generate element
   var generateBtn = document.querySelector('#generate');
   
-  // Write password to the #password input
+  // Write password to the #password input (and call generate password function)
   function writePassword() {
     let password = generatePassword();
     let passwordText = document.querySelector('#password');
@@ -172,8 +172,7 @@ let getPasswordOptions = function () {
     passwordText.value = password;
   }
   
-  writePassword()
-  
   // Add event listener to generate button
   generateBtn.addEventListener('click', writePassword);
+
   
