@@ -121,15 +121,23 @@ var specialCharacters = [
   }
   
   // Function to generate password with user input
-  function generatePassword() {
+  function generatePassword() { 
+    let newPassword = new Array(getPasswordLength.passwordLength) 
+        if (getPasswordOptions.characterLower === true) {
+            newPassword.push(getRandom(lowerCasedCharacters));
+        } else if (getPasswordOptions.characterUpper === true) {
+            newPassword.push(getRandom(upperCasedCharacters));
+        } else if (getPasswordOptions.characterNumbers === true) {
+            newPassword.push(getRandom(numericCharacters));
+        } else if (getPasswordOptions.characterSpecial === true) {
+            newPassword.push(getRandom(specialCharacters));
+        }
+    }
   
-  }
 
-  getPasswordLength()
-  getRandom(lowerCasedCharacters)
-  getRandom(upperCasedCharacters)
-  getRandom(numericCharacters)
-  getRandom(specialCharacters)
+//console.log(randomPassword)
+    getPasswordLength()
+    generatePassword()
 
   //console.log("Your password is " + getPasswordOptions.passwordLength + " characters long.")
   
